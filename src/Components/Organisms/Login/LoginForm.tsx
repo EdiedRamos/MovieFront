@@ -12,7 +12,7 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Field, Form, Formik } from "formik";
 
-import { useToggle } from "@/Core";
+import { useToggle } from "@/Core/Hooks";
 import { LoginFormController } from "./LoginFormController";
 
 export const LoginForm = (): JSX.Element => {

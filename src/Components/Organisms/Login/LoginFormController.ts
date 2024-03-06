@@ -1,20 +1,21 @@
-import { FORM_MESSAGE } from "@/Domain/Constants";
+import { useLocalToast } from "@/Core/Hooks";
+import { FORM_MESSAGE, TOAST_LOGIN } from "@/Domain/Constants";
 import { textValidation } from "@/Domain/Utils";
+import { Auth } from "@/Services";
 
-type ValuesT = {
-  email: string;
-  password: string;
-};
+import { LoginValuesT } from "@/Types";
 
-type ValidateT = Partial<ValuesT>;
+type ValidateT = Partial<LoginValuesT>;
 
 export const LoginFormController = () => {
-  const initialValues: ValuesT = {
+  const toast = useLocalToast();
+
+  const initialValues: LoginValuesT = {
     email: "",
     password: "",
   };
 
-  const validate = (values: ValuesT): ValidateT => {
+  const validate = (values: LoginValuesT): ValidateT => {
     const errors: ValidateT = {};
 
     for (const [key, value] of Object.entries(values)) {
@@ -27,8 +28,14 @@ export const LoginFormController = () => {
     return errors;
   };
 
-  const onSubmit = (values: ValuesT): void => {
-    alert(JSON.stringify(values));
+  const onSubmit = (values: LoginValuesT): void => {
+    Auth.login(values).then((response) => {
+      if (response.status) {
+        toast.fire(TOAST_LOGIN.SUCCESS);
+      } else {
+        toast.fire(TOAST_LOGIN.FAILURE);
+      }
+    });
   };
 
   return { initialValues, validate, onSubmit };
