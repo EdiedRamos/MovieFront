@@ -1,4 +1,4 @@
-import { Flex, Stack } from "@chakra-ui/react";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 
 import { LoginForm } from "@/Components/Organisms";
 import { LoginHeader, LoginImage } from "@/Components/Molecules";

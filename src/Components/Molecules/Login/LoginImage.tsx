@@ -2,7 +2,7 @@ import { Flex, Image } from "@chakra-ui/react";
 
 export const LoginImage = () => {
   return (
-    <Flex flex={1}>
+    <Flex flex={1} display={{ base: "none", md: "flex" }}>
       <Image
         alt={"Login Image"}
         objectFit={"cover"}
