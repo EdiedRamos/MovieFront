@@ -1,11 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Category, Detail, Home, Login, NotFound } from "@/Pages";
+import { Category, Detail, Home, Landing, Login, NotFound } from "@/Pages";
 import { URLS } from "@/Domain/Constants";
 
 import { PrivatePage, PublicPage } from "@/Components/Atoms";
 
 export const Router = createBrowserRouter([
+  {
+    path: URLS.ROOT,
+    element: <PublicPage children={<Landing />} />,
+  },
   {
     path: URLS.LOGIN,
     element: <PublicPage children={<Login />} />,
