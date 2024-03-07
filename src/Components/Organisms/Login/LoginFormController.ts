@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useLocalToast, useAppNavigate } from "@/Core/Hooks";
 import { FORM_MESSAGE, TOAST_LOGIN } from "@/Domain/Constants";
 import { textValidation } from "@/Domain/Utils";
@@ -8,6 +10,8 @@ import { LoginValuesT } from "@/Types";
 type ValidateT = Partial<LoginValuesT>;
 
 export const LoginFormController = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const toast = useLocalToast();
   const { appNavigate } = useAppNavigate();
 
@@ -30,16 +34,19 @@ export const LoginFormController = () => {
   };
 
   const onSubmit = (values: LoginValuesT): void => {
-    Auth.login(values).then((response): void => {
-      console.log({ response });
-      if (response.status) {
-        toast.fire(TOAST_LOGIN.SUCCESS);
-        appNavigate.home();
-      } else {
-        toast.fire(TOAST_LOGIN.FAILURE);
-      }
-    });
+    setIsLoading(true);
+    Auth.login(values)
+      .then((response): void => {
+        console.log({ response });
+        if (response.status) {
+          toast.fire(TOAST_LOGIN.SUCCESS);
+          appNavigate.home();
+        } else {
+          toast.fire(TOAST_LOGIN.FAILURE);
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
-  return { initialValues, validate, onSubmit };
+  return { initialValues, validate, onSubmit, isLoading };
 };

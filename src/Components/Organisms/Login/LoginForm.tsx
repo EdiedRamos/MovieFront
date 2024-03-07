@@ -17,7 +17,8 @@ import { LoginFormController } from "./LoginFormController";
 
 export const LoginForm = (): JSX.Element => {
   const { isActive, toggle } = useToggle();
-  const { initialValues, onSubmit, validate } = LoginFormController();
+  const { initialValues, onSubmit, validate, isLoading } =
+    LoginFormController();
 
   return (
     <Formik {...{ initialValues, validate, onSubmit }}>
@@ -51,7 +52,12 @@ export const LoginForm = (): JSX.Element => {
               </InputGroup>
               <FormErrorMessage>{props.errors.password}</FormErrorMessage>
             </FormControl>
-            <Button type="submit" colorScheme={"blue"} variant={"solid"}>
+            <Button
+              type="submit"
+              colorScheme={"blue"}
+              variant={"solid"}
+              isDisabled={isLoading}
+            >
               Iniciar sesión
             </Button>
           </Stack>
