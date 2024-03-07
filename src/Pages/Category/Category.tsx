@@ -13,6 +13,7 @@ type MovieT = {
   rating: number;
 };
 
+// ! REMOVE THIS
 const MOCK: MovieT[] = [
   {
     id: "92e7aef2-f0f1-4ab5-ba25-2f4b1d70a2e1",
