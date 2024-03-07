@@ -8,6 +8,7 @@ export const useAppNavigate = () => {
     login: () => navigate(URLS.LOGIN),
     home: () => navigate(URLS.HOME),
     category: (id: string) => navigate(URLS.CATEGORY.replace(":id", id)),
+    detail: (id: string) => navigate(URLS.DETAIL.replace(":id", id)),
   };
 
   return {

@@ -1,4 +1,5 @@
 import { SimpleCard } from "@/Components/Molecules";
+import { useAppNavigate } from "@/Core/Hooks";
 import { Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
@@ -921,6 +922,7 @@ const MOCK: MovieT[] = [
 
 export const Category = () => {
   const { id } = useParams();
+  const { appNavigate } = useAppNavigate();
 
   return (
     <Flex wrap="wrap" justifyContent="center" gap={20}>
@@ -928,6 +930,7 @@ export const Category = () => {
         <SimpleCard
           image={movie.preview.includes("https") ? movie.preview : ""}
           title={movie.name}
+          onClick={() => appNavigate.detail(movie.id)}
         />
       ))}
     </Flex>
