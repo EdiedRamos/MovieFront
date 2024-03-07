@@ -6,11 +6,15 @@ import { textValidation } from "@/Domain/Utils";
 import { Auth } from "@/Services";
 
 import { LoginValuesT } from "@/Types";
+import { useDispatch } from "react-redux";
+import { login } from "@/Store";
 
 type ValidateT = Partial<LoginValuesT>;
 
 export const LoginFormController = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   const toast = useLocalToast();
   const { appNavigate } = useAppNavigate();
@@ -37,9 +41,10 @@ export const LoginFormController = () => {
     setIsLoading(true);
     Auth.login(values)
       .then((response): void => {
-        console.log({ response });
+        // console.log({ response });
         if (response.status) {
           toast.fire(TOAST_LOGIN.SUCCESS);
+          dispatch(login(response.content));
           appNavigate.home();
         } else {
           toast.fire(TOAST_LOGIN.FAILURE);

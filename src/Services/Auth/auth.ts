@@ -1,23 +1,11 @@
 import type { LoginValuesT, LoginResponseT } from "@/Types";
-import axios, { AxiosResponse } from "axios";
-
-type UserT = {
-  email: string;
-  id: string;
-  password: string;
-  username: string;
-};
-
-type UserResponseT = UserT[];
+import { User } from "..";
 
 export const Auth = {
   login: async (values: LoginValuesT): Promise<LoginResponseT> => {
     try {
-      const response: AxiosResponse<UserResponseT> =
-        await axios.get<UserResponseT>(
-          "https://react-redux-crud-75194-default-rtdb.firebaseio.com/users.json"
-        );
-      const searchUser = response.data.filter(
+      const allUsers = await User.getAll();
+      const searchUser = allUsers.filter(
         (user) =>
           user.email === values.email && user.password === values.password
       );
@@ -29,5 +17,9 @@ export const Auth = {
     } catch {
       return { status: false, content: "ERROR" };
     }
+  },
+  verifyUser: async (userId: string): Promise<boolean> => {
+    const allUsers = await User.getAll();
+    return allUsers.some((user) => user.id === userId);
   },
 };

@@ -4,12 +4,15 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import { Router } from "@/Routes";
 import { store } from "@/Store";
+import { Setup } from "./Components/Atoms";
 
 export const App = () => {
   return (
     <ChakraProvider>
       <Provider store={store}>
-        <RouterProvider router={Router} />
+        <Setup>
+          <RouterProvider router={Router}></RouterProvider>
+        </Setup>
       </Provider>
     </ChakraProvider>
   );
