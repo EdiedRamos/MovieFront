@@ -8,12 +8,23 @@ import {
 } from "@chakra-ui/react";
 
 type SimpleCardT = {
-  id: string;
   title: string;
   image: string;
+  onClick?: () => void;
 };
 
-export const SimpleCard = ({ id, title, image }: SimpleCardT): JSX.Element => {
+const DEFAULT_IMAGE =
+  "https://images.pexels.com/photos/733853/pexels-photo-733853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+
+export const SimpleCard = ({
+  title,
+  image = DEFAULT_IMAGE,
+  onClick,
+}: SimpleCardT): JSX.Element => {
+  console.log({ image });
+
+  image = image.length === 0 ? DEFAULT_IMAGE : image;
+
   return (
     <Center pt={10}>
       <Box
@@ -27,7 +38,7 @@ export const SimpleCard = ({ id, title, image }: SimpleCardT): JSX.Element => {
         pos="relative"
         zIndex={1}
         _hover={{ cursor: "pointer" }}
-        onClick={() => alert(`go to /category/${id}`)}
+        onClick={onClick}
       >
         <Box
           rounded="lg"
