@@ -2,6 +2,8 @@ import { URLS } from "@/Domain/Constants";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
+import { NavbarProvider } from "@/Components/Layouts";
+
 export const PrivatePage = ({
   children,
 }: {
@@ -11,5 +13,9 @@ export const PrivatePage = ({
   // @ts-expect-error pending
   const isUserLogged = useSelector((state) => state.sessionReducer.isLogged);
 
-  return isUserLogged ? children : <Navigate to={URLS.LOGIN} />;
+  return isUserLogged ? (
+    <NavbarProvider children={children} />
+  ) : (
+    <Navigate to={URLS.LOGIN} />
+  );
 };
