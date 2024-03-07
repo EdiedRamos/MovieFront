@@ -1,15 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { Login } from "@/Pages";
-import { NotFound } from "@/Pages";
+import { Category, Detail, Home, Login, NotFound } from "@/Pages";
+import { URLS } from "@/Domain/Constants";
 
 export const Router = createBrowserRouter([
   {
-    path: "/login",
+    path: URLS.LOGIN,
     element: <Login />,
   },
   {
-    path: "*",
+    path: URLS.HOME,
+    element: <Home />,
+  },
+  {
+    path: URLS.CATEGORY,
+    element: <Category />,
+  },
+  {
+    path: URLS.DETAIL,
+    element: <Detail />,
+  },
+  {
+    path: URLS.ALL,
     element: <NotFound />,
   },
 ]);
