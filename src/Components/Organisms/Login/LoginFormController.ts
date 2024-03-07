@@ -29,7 +29,8 @@ export const LoginFormController = () => {
   };
 
   const onSubmit = (values: LoginValuesT): void => {
-    Auth.login(values).then((response) => {
+    Auth.login(values).then((response): void => {
+      console.log({ response });
       if (response.status) {
         toast.fire(TOAST_LOGIN.SUCCESS);
       } else {
