@@ -1,4 +1,4 @@
-import { useLocalToast } from "@/Core/Hooks";
+import { useLocalToast, useAppNavigate } from "@/Core/Hooks";
 import { FORM_MESSAGE, TOAST_LOGIN } from "@/Domain/Constants";
 import { textValidation } from "@/Domain/Utils";
 import { Auth } from "@/Services";
@@ -9,6 +9,7 @@ type ValidateT = Partial<LoginValuesT>;
 
 export const LoginFormController = () => {
   const toast = useLocalToast();
+  const { appNavigate } = useAppNavigate();
 
   const initialValues: LoginValuesT = {
     email: "",
@@ -33,6 +34,7 @@ export const LoginFormController = () => {
       console.log({ response });
       if (response.status) {
         toast.fire(TOAST_LOGIN.SUCCESS);
+        appNavigate.home();
       } else {
         toast.fire(TOAST_LOGIN.FAILURE);
       }
