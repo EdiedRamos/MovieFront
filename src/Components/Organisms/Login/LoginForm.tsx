@@ -54,7 +54,7 @@ export const LoginForm = (): JSX.Element => {
             </FormControl>
             <Button
               type="submit"
-              colorScheme={"blue"}
+              colorScheme={"red"}
               variant={"solid"}
               isDisabled={isLoading}
             >
