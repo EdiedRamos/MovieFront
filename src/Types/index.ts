@@ -5,10 +5,10 @@ export type { LoginValuesT, LoginResponseT } from "./Login/login.types";
 export type { ToastStatus } from "./Toast/toast.types";
 
 // Category
-export type { CategoryT, CategoriesT } from "./Category/category.types";
+export type { CategoryT, CategoriesT } from "./Film/Category/category.types";
 
 // UserCategory
 export type {
   UserCategoryT,
   UserCategoriesT,
-} from "./UserCategory/userCategory.types";
+} from "./Film/UserCategory/userCategory.types";
