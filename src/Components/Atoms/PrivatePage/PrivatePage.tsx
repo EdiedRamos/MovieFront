@@ -3,15 +3,16 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 import { NavbarProvider } from "@/Components/Layouts";
+import { RootState } from "@/Store";
 
 export const PrivatePage = ({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  // TODO: Add the type
-  // @ts-expect-error pending
-  const isUserLogged = useSelector((state) => state.sessionReducer.isLogged);
+  const isUserLogged = useSelector(
+    (state: RootState) => state.sessionReducer.isLogged
+  );
 
   return isUserLogged ? (
     <NavbarProvider children={children} />
