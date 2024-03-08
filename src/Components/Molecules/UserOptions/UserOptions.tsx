@@ -8,6 +8,7 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { UserOptionsController } from "./UserOptionsController";
+import { ThemeToggle } from "@/Components/Atoms";
 
 export const UserOptions = () => {
   const { handleLogout } = UserOptionsController();
@@ -30,7 +31,14 @@ export const UserOptions = () => {
           />
         </MenuButton>
         <MenuList zIndex={999}>
-          <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+          <MenuItem>
+            <ThemeToggle />
+          </MenuItem>
+          <MenuItem>
+            <Button onClick={handleLogout} w={"100%"}>
+              Cerrar sesión
+            </Button>
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>
