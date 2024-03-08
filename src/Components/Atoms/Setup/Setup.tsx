@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
 import { verifyToken } from "@/Store/Session/sessionSlice";
+import { AppDispatch } from "@/Store";
 
 export const Setup = ({ children }: { children: JSX.Element }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    // TODO: add the type
-    // @ts-expect-error pending
     dispatch(verifyToken());
   }, [dispatch]);
   return children;

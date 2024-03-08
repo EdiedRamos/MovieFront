@@ -4,10 +4,12 @@ import { Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import { RootState } from "@/Store";
 
 export const Logo = () => {
-  // @ts-expect-error pending
-  const isUserLogged = useSelector((state) => state.sessionReducer.isLogged);
+  const isUserLogged = useSelector(
+    (state: RootState) => state.sessionReducer.isLogged
+  );
 
   return (
     <Text as={Link} to={isUserLogged ? URLS.HOME : URLS.ROOT}>
