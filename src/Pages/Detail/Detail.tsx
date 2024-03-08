@@ -11,14 +11,15 @@ import {
   SimpleGrid,
   StackDivider,
   useColorModeValue,
+  Image,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-// const DEFAULT_IMAGE =
-//   "https://images.pexels.com/photos/733853/pexels-photo-733853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+const DEFAULT_IMAGE =
+  "https://images.pexels.com/photos/733853/pexels-photo-733853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
 type RatingT = {
   rating: number;
@@ -75,26 +76,31 @@ export const Detail = () => {
         py={{ base: 18, md: 24 }}
       >
         <Flex>
-          {/* <Image
-            rounded={"md"}
-            alt={"product image"}
-            src={
-              movie?.preview.includes("https") ? movie?.preview : DEFAULT_IMAGE
-            }
-            fit={"cover"}
-            align={"center"}
-            w={"100%"}
-            h={{ base: "100%", sm: "400px", lg: "500px" }}
-          /> */}
-          <iframe
-            style={{ borderRadius: "8px" }}
-            width="100%"
-            height="500px"
-            src="https://www.youtube.com/embed/M1qt83N3JWg?si=pHGrK13zR3SxZWWa"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          {movie?.trailer ? (
+            <iframe
+              style={{ borderRadius: "8px" }}
+              width="100%"
+              height="500px"
+              src={movie.trailer}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <Image
+              rounded={"md"}
+              alt={"product image"}
+              src={
+                movie?.preview.includes("https")
+                  ? movie?.preview
+                  : DEFAULT_IMAGE
+              }
+              fit={"cover"}
+              align={"center"}
+              w={"100%"}
+              h={{ base: "100%", sm: "400px", lg: "500px" }}
+            />
+          )}
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
           <Box as={"header"}>
