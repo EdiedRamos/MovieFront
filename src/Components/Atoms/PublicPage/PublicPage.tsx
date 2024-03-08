@@ -8,9 +8,12 @@ export const PublicPage = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const isUserLogged = useSelector(
-    (state: RootState) => state.sessionReducer.isLogged
-  );
+  const sessionInfo = useSelector((state: RootState) => state.sessionReducer);
 
-  return isUserLogged ? <Navigate to={URLS.HOME} /> : children;
+  if (sessionInfo.isCheckingToken) {
+    // TODO: Create component for this
+    return <div>Validando!!!</div>;
+  }
+
+  return sessionInfo.isLogged ? <Navigate to={URLS.HOME} /> : children;
 };

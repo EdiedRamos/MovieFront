@@ -8,11 +8,13 @@ type UserT = {
 
 type StateT = {
   isLogged: boolean;
+  isCheckingToken: boolean;
   user: UserT | null;
 };
 
 const initialState: StateT = {
   isLogged: !!LocalData.getUserId(),
+  isCheckingToken: !!LocalData.getUserId(),
   user: null,
 };
 
@@ -48,9 +50,11 @@ export const sessionSlice = createSlice({
       if (!action.payload.state) {
         localStorage.removeItem("userId");
         state.isLogged = false;
+        state.isCheckingToken = false;
         return;
       }
       state.isLogged = true;
+      state.isCheckingToken = false;
     });
   },
 });

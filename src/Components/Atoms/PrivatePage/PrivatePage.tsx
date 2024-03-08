@@ -10,11 +10,14 @@ export const PrivatePage = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const isUserLogged = useSelector(
-    (state: RootState) => state.sessionReducer.isLogged
-  );
+  const sessionInfo = useSelector((state: RootState) => state.sessionReducer);
 
-  return isUserLogged ? (
+  if (sessionInfo.isCheckingToken) {
+    // TODO: Create component for this
+    return <div>Validando!!!</div>;
+  }
+
+  return sessionInfo.isLogged ? (
     <NavbarProvider children={children} />
   ) : (
     <Navigate to={URLS.LOGIN} />
