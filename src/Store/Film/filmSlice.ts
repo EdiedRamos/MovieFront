@@ -8,7 +8,7 @@ type StateT = {
 };
 
 export const setCategories = createAsyncThunk(
-  "category/setCategories",
+  "film/setCategories",
   async (): Promise<CategoriesT> => {
     const categories: CategoriesT = await UserCategoryService.getByUserId();
     return categories;
@@ -19,8 +19,8 @@ const initialState: StateT = {
   categories: [],
 };
 
-export const categorySlice = createSlice({
-  name: "category",
+export const filmSlice = createSlice({
+  name: "film",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -31,4 +31,4 @@ export const categorySlice = createSlice({
 });
 
 // export const { smoke } = categorySlice.actions;
-export const { reducer: categoryReducer } = categorySlice;
+export const { reducer: filmReducer } = filmSlice;

@@ -2,7 +2,7 @@
 export { login, logout, sessionReducer } from "./Session/sessionSlice";
 
 // categorySlice
-export { categoryReducer, setCategories } from "./Category/categorySlice";
+export { filmReducer, setCategories } from "./Film/filmSlice";
 
 // store
 export { store } from "./Init/init";

@@ -6,7 +6,7 @@ import { RootState, setCategories } from "@/Store";
 
 export const UserCategoryController = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const categories = useSelector((store: RootState) => store.categoryReducer);
+  const categories = useSelector((store: RootState) => store.filmReducer);
 
   useEffect(() => {
     dispatch(setCategories());
