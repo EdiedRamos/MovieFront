@@ -4,13 +4,13 @@ import { UserCategoryController } from "./UserCategoryController";
 import { useAppNavigate } from "@/Core/Hooks";
 
 export const UserCategory = () => {
-  const { MOCK } = UserCategoryController();
+  const { categories } = UserCategoryController();
 
   const { appNavigate } = useAppNavigate();
 
   return (
     <Flex justifyContent="center" gap={10} wrap="wrap">
-      {MOCK.map((info) => (
+      {categories.categories.map((info) => (
         <SimpleCard
           key={info.id}
           image={info.picture}
