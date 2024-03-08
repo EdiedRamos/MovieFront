@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 import type { CategoriesT, UserCategoriesT, UserCategoryT } from "@/Types";
-import { CategoryService } from "..";
+import { CategoryService } from "../..";
 import { LocalData } from "@/Domain/Utils";
 
 export const UserCategoryService = {
