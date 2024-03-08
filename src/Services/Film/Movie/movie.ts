@@ -1,5 +1,6 @@
-import { MoviesT } from "@/Types";
+import { MoviesT, MovieT } from "@/Types";
 import axios, { AxiosResponse } from "axios";
+import { UserCategoryService } from "../UserCategory/userCategory";
 
 export const MovieService = {
   async getAll(): Promise<MoviesT> {
@@ -13,11 +14,39 @@ export const MovieService = {
       return defaultResponse;
     }
   },
-  async getByCategory(category: string): Promise<MoviesT> {
+  async getByOwner(): Promise<MoviesT> {
     const defaultResponse: MoviesT = [];
     try {
       const movies: MoviesT = await this.getAll();
-      return movies.filter((movie) => movie.categoryId === category);
+      if (movies.length === 0) return defaultResponse;
+
+      const userCategories: Array<string> =
+        await UserCategoryService.getByUserId();
+      if (userCategories.length === 0) return defaultResponse;
+
+      console.log({ userCategories });
+
+      return movies.filter((movie) =>
+        userCategories.includes(movie.categoryId)
+      );
+    } catch {
+      return defaultResponse;
+    }
+  },
+  async getByCategory(categoryId: string): Promise<MoviesT> {
+    const defaultResponse: MoviesT = [];
+    try {
+      const movies: MoviesT = await this.getByOwner();
+      return movies.filter((movie) => movie.categoryId === categoryId);
+    } catch {
+      return defaultResponse;
+    }
+  },
+  async getById(movieId: string): Promise<MovieT | undefined> {
+    const defaultResponse: MovieT | undefined = undefined;
+    try {
+      const movies: MoviesT = await this.getByOwner();
+      return movies.find((movie) => movie.id === movieId);
     } catch {
       return defaultResponse;
     }

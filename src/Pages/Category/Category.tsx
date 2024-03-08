@@ -21,20 +21,19 @@ export const Category = () => {
   const movies = useSelector((state: RootState) => state.filmReducer.movies);
 
   useEffect(() => {
-    dispatch(setMovies());
-  }, [dispatch]);
+    if (!id) return;
+    dispatch(setMovies(id));
+  }, [dispatch, id]);
 
   return (
     <Flex wrap="wrap" justifyContent="center" gap={20}>
-      {movies
-        .filter((movie) => movie.categoryId === id)
-        .map((movie: MovieT) => (
-          <SimpleCard
-            image={movie.preview.includes("https") ? movie.preview : ""}
-            title={movie.name}
-            onClick={() => appNavigate.detail(movie.id)}
-          />
-        ))}
+      {movies.map((movie: MovieT) => (
+        <SimpleCard
+          image={movie.preview.includes("https") ? movie.preview : ""}
+          title={movie.name}
+          onClick={() => appNavigate.detail(movie.id)}
+        />
+      ))}
     </Flex>
   );
 };

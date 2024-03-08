@@ -1,33 +1,43 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import type { CategoriesT, MoviesT } from "@/Types";
-import { UserCategoryService } from "@/Services";
+import type { CategoriesT, MovieT, MoviesT } from "@/Types";
+import { CategoryService } from "@/Services";
 import { MovieService } from "@/Services/Film/Movie/movie";
 
 type StateT = {
   categories: CategoriesT;
   movies: MoviesT;
+  movie: MovieT | undefined;
 };
 
 export const setCategories = createAsyncThunk(
   "film/setCategories",
   async (): Promise<CategoriesT> => {
-    const categories: CategoriesT = await UserCategoryService.getByUserId();
+    const categories: CategoriesT = await CategoryService.getByUserId();
     return categories;
   }
 );
 
 export const setMovies = createAsyncThunk(
   "film/setMovies",
-  async (): Promise<MoviesT> => {
-    const movies: MoviesT = await MovieService.getAll();
+  async (categoryId: string): Promise<MoviesT> => {
+    const movies: MoviesT = await MovieService.getByCategory(categoryId);
     return movies;
+  }
+);
+
+export const setMovie = createAsyncThunk(
+  "film/setMovie",
+  async (movieId: string): Promise<MovieT | undefined> => {
+    const movie: MovieT | undefined = await MovieService.getById(movieId);
+    return movie;
   }
 );
 
 const initialState: StateT = {
   categories: [],
   movies: [],
+  movie: undefined,
 };
 
 export const filmSlice = createSlice({
@@ -43,6 +53,10 @@ export const filmSlice = createSlice({
       // setMovies
       .addCase(setMovies.fulfilled, (state, action) => {
         state.movies = action.payload;
+      })
+      // setMovie
+      .addCase(setMovie.fulfilled, (state, action) => {
+        state.movie = action.payload;
       });
   },
 });

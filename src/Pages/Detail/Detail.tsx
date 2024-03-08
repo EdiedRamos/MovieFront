@@ -1,5 +1,4 @@
-import { AppDispatch, RootState, setMovies } from "@/Store";
-import { MovieT } from "@/Types";
+import { AppDispatch, RootState, setMovie } from "@/Store";
 import {
   Box,
   Container,
@@ -56,17 +55,14 @@ function Rating({ rating }: RatingT) {
 export const Detail = () => {
   const { id } = useParams();
 
-  const movies = useSelector((state: RootState) => state.filmReducer.movies);
+  const movie = useSelector((state: RootState) => state.filmReducer.movie);
 
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(setMovies());
-  }, [dispatch]);
-
-  const movie: MovieT | undefined = movies.find(
-    (movie: MovieT) => movie.id === id
-  );
+    if (!id) return;
+    dispatch(setMovie(id));
+  }, [dispatch, id]);
 
   return (
     <Container maxW={"7xl"}>

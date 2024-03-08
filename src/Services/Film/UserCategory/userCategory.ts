@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-import type { CategoriesT, UserCategoriesT, UserCategoryT } from "@/Types";
-import { CategoryService } from "../..";
+import type { UserCategoriesT, UserCategoryT } from "@/Types";
 import { LocalData } from "@/Domain/Utils";
 
 export const UserCategoryService = {
@@ -17,29 +16,23 @@ export const UserCategoryService = {
     }
   },
 
-  async getByUserId(): Promise<CategoriesT> {
-    const defualtResponse: CategoriesT = [];
+  async getByUserId(): Promise<Array<string>> {
+    const defaultResponse: Array<string> = [];
     const userId: string | null = LocalData.getUserId();
-    if (!userId) return defualtResponse;
+    if (!userId) return defaultResponse;
 
     try {
-      const categories: CategoriesT = await CategoryService.getAll();
-      if (categories.length === 0) return defualtResponse;
-
       const userCategories: UserCategoriesT = await this.getAll();
-      if (userCategories.length === 0) return defualtResponse;
+      if (userCategories.length === 0) return defaultResponse;
 
-      console.log({ userCategories });
       const userCategory: UserCategoryT | undefined = userCategories.find(
-        (category) => category.user_id === userId
+        (userCategory) => userCategory.user_id === userId
       );
-      if (!userCategory) return defualtResponse;
+      if (!userCategory) return defaultResponse;
 
-      return categories.filter((category) =>
-        userCategory.category_ids.includes(category.id)
-      );
+      return userCategory.category_ids;
     } catch {
-      return defualtResponse;
+      return defaultResponse;
     }
   },
 };
