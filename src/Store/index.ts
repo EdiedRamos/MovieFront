@@ -1,8 +1,8 @@
 // sessionSlice
 export { login, logout, sessionReducer } from "./Session/sessionSlice";
 
-// categorySlice
-export { filmReducer, setCategories } from "./Film/filmSlice";
+// filmSlice
+export { filmReducer, setCategories, setMovies } from "./Film/filmSlice";
 
 // store
 export { store } from "./Init/init";
