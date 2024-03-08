@@ -1,3 +1,4 @@
+import { LocalData } from "@/Domain/Utils";
 import { Auth } from "@/Services";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -11,7 +12,7 @@ type StateT = {
 };
 
 const initialState: StateT = {
-  isLogged: false,
+  isLogged: !!LocalData.getUserId(),
   user: null,
 };
 
