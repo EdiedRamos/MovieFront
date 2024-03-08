@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 
 import { NavbarProvider } from "@/Components/Layouts";
 import { RootState } from "@/Store";
+import { LoadingPage } from "..";
 
 export const PrivatePage = ({
   children,
@@ -12,10 +13,7 @@ export const PrivatePage = ({
 }): JSX.Element => {
   const sessionInfo = useSelector((state: RootState) => state.sessionReducer);
 
-  if (sessionInfo.isCheckingToken) {
-    // TODO: Create component for this
-    return <div>Validando!!!</div>;
-  }
+  if (sessionInfo.isCheckingToken) return <LoadingPage />;
 
   return sessionInfo.isLogged ? (
     <NavbarProvider children={children} />
