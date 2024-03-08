@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Center, Container } from "@chakra-ui/react";
 
 import { SimpleCard } from "@/Components/Molecules";
 import { useAppNavigate } from "@/Core/Hooks";
@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/Store";
 import { useEffect } from "react";
 import { setMovies } from "@/Store";
+
+import { UnderlineHeading } from "@/Components/Atoms";
+import { PageLayout } from "@/Components/Layouts";
 
 // TODO: Create controller, and refactor responsability
 
@@ -26,14 +29,21 @@ export const Category = () => {
   }, [dispatch, id]);
 
   return (
-    <Flex wrap="wrap" justifyContent="center" gap={20}>
-      {movies.map((movie: MovieT) => (
-        <SimpleCard
-          image={movie.preview.includes("https") ? movie.preview : ""}
-          title={movie.name}
-          onClick={() => appNavigate.detail(movie.id)}
-        />
-      ))}
-    </Flex>
+    <PageLayout>
+      <Center mb={5}>
+        <UnderlineHeading>Películas</UnderlineHeading>
+      </Center>
+      <Container maxW={"7xl"}>
+        <Flex wrap="wrap" justifyContent="center" gap={20}>
+          {movies.map((movie: MovieT) => (
+            <SimpleCard
+              image={movie.preview.includes("https") ? movie.preview : ""}
+              title={movie.name}
+              onClick={() => appNavigate.detail(movie.id)}
+            />
+          ))}
+        </Flex>
+      </Container>
+    </PageLayout>
   );
 };
