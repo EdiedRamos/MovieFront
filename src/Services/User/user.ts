@@ -1,3 +1,4 @@
+import { UserInfoT } from "@/Types";
 import axios, { AxiosResponse } from "axios";
 
 type UserT = {
@@ -5,6 +6,7 @@ type UserT = {
   id: string;
   password: string;
   username: string;
+  photo: string;
 };
 
 type UserResponseT = UserT[];
@@ -20,5 +22,13 @@ export const User = {
     } catch {
       return [];
     }
+  },
+  cleanInfo: (user: UserT): UserInfoT => {
+    const cleaned: UserInfoT = {
+      id: user.id,
+      username: user.username,
+      photo: user.photo,
+    };
+    return cleaned;
   },
 };

@@ -10,7 +10,7 @@ export const Auth = {
           user.email === values.email && user.password === values.password
       );
       if (searchUser.length === 1) {
-        return { status: true, content: searchUser[0].id };
+        return { status: true, content: User.cleanInfo(searchUser[0]) };
       } else {
         return { status: false, content: "" };
       }

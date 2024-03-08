@@ -42,7 +42,7 @@ export const LoginFormController = () => {
     Auth.login(values)
       .then((response): void => {
         // console.log({ response });
-        if (response.status) {
+        if (response.status && typeof response.content !== "string") {
           toast.fire(TOAST_LOGIN.SUCCESS);
           dispatch(login(response.content));
           appNavigate.home();

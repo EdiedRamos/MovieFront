@@ -1,6 +1,7 @@
 import { LocalData } from "@/Domain/Utils";
 import { Auth } from "@/Services";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { UserInfoT } from "@/Types";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 type UserT = {
   id: string;
@@ -36,9 +37,9 @@ export const sessionSlice = createSlice({
   name: "session",
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: (state, action: PayloadAction<UserInfoT>) => {
       state.isLogged = true;
-      localStorage.setItem("userId", action.payload);
+      localStorage.setItem("userId", action.payload.id);
     },
     logout: (state) => {
       state.isLogged = false;
