@@ -7,6 +7,7 @@ import { MovieService } from "@/Services/Film/Movie/movie";
 type StateT = {
   categories: CategoriesT;
   movies: MoviesT;
+  isLoadingMovies: boolean;
   movie: MovieT | undefined;
 };
 
@@ -37,6 +38,7 @@ export const setMovie = createAsyncThunk(
 const initialState: StateT = {
   categories: [],
   movies: [],
+  isLoadingMovies: true,
   movie: undefined,
 };
 
@@ -53,10 +55,13 @@ export const filmSlice = createSlice({
       // setMovies
       .addCase(setMovies.fulfilled, (state, action) => {
         state.movies = action.payload;
+        state.isLoadingMovies = false;
       })
+
       // setMovie
       .addCase(setMovie.fulfilled, (state, action) => {
         state.movie = action.payload;
+        state.isLoadingMovies = false;
       });
   },
 });

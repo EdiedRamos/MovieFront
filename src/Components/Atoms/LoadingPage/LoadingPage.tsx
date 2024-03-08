@@ -1,17 +1,10 @@
-import { Box, Center, Progress } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { CustomProgress } from "..";
 
 export const LoadingPage = () => {
   return (
     <Box height="100vh">
-      <Center height={"inherit"}>
-        <Progress
-          rounded={"20"}
-          width={{ base: "50%", md: "25%" }}
-          colorScheme={"red"}
-          size="lg"
-          isIndeterminate
-        />
-      </Center>
+      <CustomProgress height={"inherit"} />
     </Box>
   );
 };
