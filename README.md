@@ -1,5 +1,12 @@
 ![logo](./readme-assets/image-1.png)
 
+### Pasos para ejecutar en local
+
+- Clonar este repositorio.
+- Tener instalado Node.js
+- Instalar dependencias `yarn` _si usas otro gestor no hay problema_.
+- Iniciar el proyecto con _dev_ `yarn dev`
+
 ### Plataforma de películas con las siguientes características:
 
 - Landing page.
