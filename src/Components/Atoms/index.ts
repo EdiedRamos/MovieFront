@@ -6,3 +6,5 @@ export { UnderlineHeading } from "./UnderlineHeading/UnderlineHeading";
 export { LoadingPage } from "./LoadingPage/LoadingPage";
 export { CustomProgress } from "./CustomProgress/CustomProgress";
 export { ThemeToggle } from "./ThemeToggle/ThemeToggle";
+
+export { PlayIcon } from "./PlayIcon/PlayIcon";
