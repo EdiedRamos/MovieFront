@@ -68,6 +68,7 @@ export const SimpleCard = ({
             objectFit="cover"
             src={image}
             alt={`${title} image`}
+            loading="lazy"
           />
         </Box>
         <Stack pt={10} align="center">
