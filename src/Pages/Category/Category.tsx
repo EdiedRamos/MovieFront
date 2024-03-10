@@ -33,6 +33,7 @@ export const Category = () => {
           <Flex wrap="wrap" justifyContent="center" gap={20}>
             {filmState.movies.map((movie: MovieT) => (
               <SimpleCard
+                key={movie.id}
                 image={movie.preview.includes("https") ? movie.preview : ""}
                 title={movie.name}
                 onClick={() => appNavigate.detail(movie.id)}
