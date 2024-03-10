@@ -24,8 +24,6 @@ export const MovieService = {
         await UserCategoryService.getByUserId();
       if (userCategories.length === 0) return defaultResponse;
 
-      console.log({ userCategories });
-
       return movies.filter((movie) =>
         userCategories.includes(movie.categoryId)
       );

@@ -21,8 +21,6 @@ export const SimpleCard = ({
   image = DEFAULT_IMAGE,
   onClick,
 }: SimpleCardT): JSX.Element => {
-  // console.log({ image });
-
   image = image.length === 0 ? DEFAULT_IMAGE : image;
 
   return (

@@ -41,7 +41,6 @@ export const LoginFormController = () => {
     setIsLoading(true);
     Auth.login(values)
       .then((response): void => {
-        // console.log({ response });
         if (response.status && typeof response.content !== "string") {
           toast.fire(TOAST_LOGIN.SUCCESS);
           dispatch(login(response.content));
