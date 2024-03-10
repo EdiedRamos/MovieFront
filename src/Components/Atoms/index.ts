@@ -5,7 +5,6 @@ export { PrivatePage } from "./PrivatePage/PrivatePage";
 export { UnderlineHeading } from "./UnderlineHeading/UnderlineHeading";
 export { LoadingPage } from "./LoadingPage/LoadingPage";
 export { CustomProgress } from "./CustomProgress/CustomProgress";
-export { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 export { StarRating } from "./StarRating/StarRating";
 
 export { PlayIcon } from "./PlayIcon/PlayIcon";

@@ -19,7 +19,11 @@ export const NavItems = () => {
   return (
     <Stack as="nav" wrap="wrap" direction={"row"} spacing={4}>
       {navItems.map((navItem) => (
-        <Popover trigger={"hover"} placement={"bottom-start"}>
+        <Popover
+          key={navItem.label}
+          trigger={"hover"}
+          placement={"bottom-start"}
+        >
           <PopoverTrigger>
             <Box
               as={Link}

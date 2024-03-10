@@ -6,12 +6,16 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useColorMode,
 } from "@chakra-ui/react";
+
+import { BsSun, BsMoonStarsFill } from "react-icons/bs";
+
 import { UserOptionsController } from "./UserOptionsController";
-import { ThemeToggle } from "@/Components/Atoms";
 
 export const UserOptions = () => {
   const { handleLogout } = UserOptionsController();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Flex alignItems={"center"}>
@@ -31,13 +35,11 @@ export const UserOptions = () => {
           />
         </MenuButton>
         <MenuList zIndex={999}>
-          <MenuItem>
-            <ThemeToggle />
+          <MenuItem as={Button} onClick={toggleColorMode} w={"90%"} mx={"auto"}>
+            {colorMode === "light" ? <BsMoonStarsFill /> : <BsSun />}
           </MenuItem>
-          <MenuItem>
-            <Button onClick={handleLogout} w={"100%"}>
-              Cerrar sesión
-            </Button>
+          <MenuItem as={Button} onClick={handleLogout} w={"90%"} mx={"auto"}>
+            Cerrar sesión
           </MenuItem>
         </MenuList>
       </Menu>
