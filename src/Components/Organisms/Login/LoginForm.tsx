@@ -32,6 +32,7 @@ export const LoginForm = (): JSX.Element => {
                 type="email"
                 name="email"
                 placeholder="Ingresa tu correo electrónico"
+                autoComplete="username"
               />
               <FormErrorMessage>{props.errors.email}</FormErrorMessage>
             </FormControl>
@@ -43,6 +44,7 @@ export const LoginForm = (): JSX.Element => {
                   type={isActive ? "text" : "password"}
                   name="password"
                   placeholder="Ingresa tu contraseña"
+                  autoComplete="current-password"
                 />
                 <InputRightElement>
                   <Button onClick={toggle}>
