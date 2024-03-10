@@ -1,4 +1,3 @@
-import { AppDispatch, RootState, setMovie } from "@/Store";
 import {
   Box,
   Container,
@@ -12,64 +11,18 @@ import {
   useColorModeValue,
   Image,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { NotFound } from "..";
-import { CustomProgress } from "@/Components/Atoms";
+import { CustomProgress, StarRating } from "@/Components/Atoms";
+import { DetailController } from "./DetailController";
 
 const DEFAULT_IMAGE =
   "https://images.pexels.com/photos/733853/pexels-photo-733853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
-type RatingT = {
-  rating: number;
-};
-
-// TODO: move this to the right folder
-function Rating({ rating }: RatingT) {
-  return (
-    <Box display="flex" alignItems="center">
-      {Array(5)
-        .fill("")
-        .map((_, i) => {
-          const roundedRating = Math.round(rating * 2) / 2;
-          if (roundedRating - i >= 1) {
-            return (
-              <BsStarFill
-                key={i}
-                style={{ marginLeft: "1" }}
-                color={i < rating ? "teal.500" : "gray.300"}
-              />
-            );
-          }
-          if (roundedRating - i === 0.5) {
-            return <BsStarHalf key={i} style={{ marginLeft: "1" }} />;
-          }
-          return <BsStar key={i} style={{ marginLeft: "1" }} />;
-        })}
-    </Box>
-  );
-}
-
-// TODO: Create controller and refactor logic
-
-export const Detail = () => {
+export const Detail = (): JSX.Element => {
   const textColor = useColorModeValue("gray.900", "gray.400");
   const stackDividerBorderColor = useColorModeValue("gray.200", "gray.600");
 
-  const { id } = useParams();
-
-  const filmState = useSelector((state: RootState) => state.filmReducer);
-
-  const movie = filmState.movie;
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    if (!id) return;
-    dispatch(setMovie(id));
-  }, [dispatch, id]);
+  const { movie, filmState } = DetailController();
 
   if (!filmState.isLoadingMovies && !movie) {
     return <NotFound />;
@@ -134,7 +87,7 @@ export const Detail = () => {
                 <Text fontSize={"lg"}>{movie?.sinopsis || "sinopsis"}</Text>
               </VStack>
               <Box>
-                <Rating rating={movie?.rating || 0} />
+                <StarRating rating={movie?.rating ?? 0} />
               </Box>
             </Stack>
           </Stack>
